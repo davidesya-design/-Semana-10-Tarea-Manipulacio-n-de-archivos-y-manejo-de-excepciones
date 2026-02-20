@@ -1,4 +1,4 @@
-# main.py
+5# main.py
 
 from modelos.producto import Producto
 from servicios.inventario import Inventario
@@ -25,8 +25,16 @@ def add_product(inventario):
         precio = float(input("Precio: "))
         
         producto = Producto(id_producto, nombre, cantidad, precio)
-        inventario.añadir_producto(producto)
-        print("Producto añadido correctamente.")
+        try:
+            if inventario.añadir_producto(producto):
+                print("Producto añadido correctamente y guardado en inventario.")
+        except ValueError as ve:
+            # Repetir ID o validaciones del modelo
+            print(f"Error: {ve}")
+        except PermissionError:
+            print("Error: No hay permiso para escribir el archivo de inventario.")
+        except OSError as e:
+            print(f"Error al escribir en el archivo de inventario: {e}")
     except ValueError as e:
         print(f"Error: {e}")
 
@@ -34,10 +42,15 @@ def add_product(inventario):
 def delete_product(inventario):
     try:
         id_producto = int(input("ID del producto a eliminar: "))
-        if inventario.eliminar_producto(id_producto):
-            print("Producto eliminado correctamente.")
-        else:
-            print("Producto no encontrado.")
+        try:
+            if inventario.eliminar_producto(id_producto):
+                print("Producto eliminado correctamente y cambios guardados.")
+            else:
+                print("Producto no encontrado.")
+        except PermissionError:
+            print("Error: No hay permiso para modificar el archivo de inventario.")
+        except OSError as e:
+            print(f"Error al actualizar el archivo de inventario: {e}")
     except ValueError:
         print("Error: ID debe ser un número entero.")
 
@@ -50,11 +63,17 @@ def update_product(inventario):
         
         nueva_cantidad = int(cantidad) if cantidad else None
         nuevo_precio = float(precio) if precio else None
-        
-        if inventario.actualizar_producto(id_producto, nueva_cantidad, nuevo_precio):
-            print("Producto actualizado correctamente.")
-        else:
-            print("Producto no encontrado.")
+        try:
+            if inventario.actualizar_producto(id_producto, nueva_cantidad, nuevo_precio):
+                print("Producto actualizado correctamente y cambios guardados.")
+            else:
+                print("Producto no encontrado.")
+        except ValueError as ve:
+            print(f"Error: {ve}")
+        except PermissionError:
+            print("Error: No hay permiso para escribir el archivo de inventario.")
+        except OSError as e:
+            print(f"Error al escribir en el archivo de inventario: {e}")
     except ValueError as e:
         print(f"Error: {e}")
 

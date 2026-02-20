@@ -1,0 +1,11 @@
+1;El cielo conoce;3;4.5
+2;la historia que hemos nacido;3;4.5
+3;de nuestro corazón;3;4.5
+4;De las sombras que cortan profundo;3;4.5
+5;y los héroes que nos;3;4.5
+6;salvan El cielo conoce;3;4.5
+7;La belleza del alma;3;4.5
+8;y lloramos;3;4.5
+9;Por la majestad y;3;4.5
+10;rezamos para no olvidar;3;4.5
+11;la historia de DELTARUNE;3;4.5
